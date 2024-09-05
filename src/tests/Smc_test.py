@@ -46,21 +46,21 @@ class SMCTestCase(unittest.TestCase):
         example = 'shared_coin'
         mdp = load_automaton_from_file(f'/Users/bo40/workspace/python/AALpy/DotModels/MDPs/{example}.dot', automaton_type='mdp')
         sul = MdpSUL(mdp)
-        sample_prism_model = f'/Users/bo40/workspace/python/mc_exp_sample.prism'
-        sample_prism_adv = f'/Users/bo40/workspace/python/adv_sample.tra'
+        sample_prism_model = '/Users/bo40/workspace/python/mc_exp_sample.prism'
+        sample_prism_adv = '/Users/bo40/workspace/python/adv_sample.tra'
         sb = StrategyBridge(sample_prism_adv, sample_prism_model)
 
-        spec_path = f'/Users/bo40/workspace/python/sandbox/shared_coin.ltl'
+        spec_path = '/Users/bo40/workspace/python/sandbox/shared_coin.ltl'
         smc = StatisticalModelChecker(sul, sb, spec_path)
 
         custom_print(smc.spec_monitor)
 
         smc.reset_sut()
-        ret = smc.one_step()
+        # ret = smc.one_step()
         smc.step_monitor(smc.current_output)
-        ret = smc.one_step()
+        # ret = smc.one_step()
         smc.step_monitor(smc.current_output)
-        ret = smc.one_step()
+        # ret = smc.one_step()
         smc.step_monitor(smc.current_output)
 
         0
@@ -69,11 +69,11 @@ class SMCTestCase(unittest.TestCase):
         example = 'shared_coin'
         mdp = load_automaton_from_file(f'/Users/bo40/workspace/python/AALpy/DotModels/MDPs/{example}.dot', automaton_type='mdp')
         sul = MdpSUL(mdp)
-        sample_prism_model = f'/Users/bo40/workspace/python/mc_exp_sample.prism'
-        sample_prism_adv = f'/Users/bo40/workspace/python/adv_sample.tra'
+        sample_prism_model = '/Users/bo40/workspace/python/mc_exp_sample.prism'
+        sample_prism_adv = '/Users/bo40/workspace/python/adv_sample.tra'
         sb = StrategyBridge(sample_prism_adv, sample_prism_model)
 
-        spec_path = f'/Users/bo40/workspace/python/sandbox/shared_coin.ltl'
+        spec_path = '/Users/bo40/workspace/python/sandbox/shared_coin.ltl'
         smc = StatisticalModelChecker(sul, sb, spec_path, num_exec=5000)
 
         smc.run()

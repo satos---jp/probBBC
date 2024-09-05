@@ -3,7 +3,7 @@ from aalpy.automata import StochasticMealyMachine
 from aalpy.SULs import MdpSUL
 from aalpy.oracles import RandomWalkEqOracle, RandomWordEqOracle
 from aalpy.learning_algs import run_stochastic_Lstar
-from aalpy.utils import visualize_automaton, load_automaton_from_file, model_check_experiment, get_properties_file, get_correct_prop_values
+from aalpy.utils import load_automaton_from_file, model_check_experiment, get_properties_file, get_correct_prop_values
 from aalpy.automata.StochasticMealyMachine import smm_to_mdp_conversion
 
 def learn_benchmark_mdp(example, automaton_type='smm', n_c=20, n_resample=1000, min_rounds=20, max_rounds=500,

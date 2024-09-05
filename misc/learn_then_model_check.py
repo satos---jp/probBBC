@@ -3,7 +3,7 @@ from aalpy.automata import StochasticMealyMachine
 from aalpy.SULs import MdpSUL
 from aalpy.oracles import RandomWalkEqOracle, RandomWordEqOracle
 from aalpy.learning_algs import run_stochastic_Lstar
-from aalpy.utils import visualize_automaton, load_automaton_from_file, model_check_experiment, get_properties_file, get_correct_prop_values, mdp_2_prism_format
+from aalpy.utils import load_automaton_from_file, mdp_2_prism_format
 from aalpy.automata.StochasticMealyMachine import smm_to_mdp_conversion
 from ..src.PrismModelConverter import add_step_counter_to_prism_model
 

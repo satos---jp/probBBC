@@ -3,17 +3,14 @@ import re
 import collections
 import os
 import shutil
-from sys import prefix
-from typing import List
 import aalpy.paths
-from aalpy.base import Oracle, SUL
+from aalpy.base import SUL
 from aalpy.automata import StochasticMealyMachine
 from aalpy.SULs import MdpSUL
-from aalpy.oracles import RandomWalkEqOracle, RandomWordEqOracle
+from aalpy.oracles import RandomWalkEqOracle
 from aalpy.learning_algs import run_stochastic_Lstar
-from aalpy.utils import load_automaton_from_file, mdp_2_prism_format, get_properties_file, get_correct_prop_values
+from aalpy.utils import load_automaton_from_file, mdp_2_prism_format
 from aalpy.automata.StochasticMealyMachine import smm_to_mdp_conversion
-from aalpy.utils.HelperFunctions import print_observation_table
 
 from Smc import StatisticalModelChecker
 from StrategyBridge import StrategyBridge
@@ -306,7 +303,7 @@ class ProbBBReachOracle(RandomWalkEqOracle):
         if not self.only_classical_equivalence_testing:
             logging.info(f'CEX from SMC: {cex}')
 
-            if cex != -1 and cex != None:
+            if cex != -1 and cex is not None:
                 # 具体的な反例が得られればそれを返す
                 return cex
 
@@ -330,7 +327,7 @@ class ProbBBReachOracle(RandomWalkEqOracle):
                 logging.info("Compare frequency between SMC sample and hypothesis.")
                 # cex = compare_frequency(smc.satisfied_exec_sample, smc.exec_sample, mdp, self.statistical_test_bound)
                 cex = compare_frequency_with_tail(smc.exec_sample, mdp, self.statistical_test_bound)
-                if cex != None:
+                if cex is not None:
                     logging.info(f"CEX from compare_frequency : {cex}")
                     return cex
                 logging.info("Could not find counterexample by compare_frequency.")

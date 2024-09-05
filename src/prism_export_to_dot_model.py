@@ -27,7 +27,7 @@ def main():
 
     labels = {}
     name_of_labels = {}
-    initial_state = None
+    # initial_state = None
     label_name_line_regex = re.compile('(\d+="\w+" )*(\d+="\w+")')
     label_name_regex = re.compile('(\d+)="(\w+)"')
     label_regex = re.compile('(\d+): (.*)')
@@ -47,8 +47,9 @@ def main():
                     for idx in m_index:
                         name = name_of_labels[idx]
                         if name == "init":
-                            initial_state = m[1]
-                        if not name in except_names:
+                            pass
+                            # initial_state = m[1]
+                        if name not in except_names:
                             label_names.append(name)
                     labels[m[1]] = "__".join(label_names)
 

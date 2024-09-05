@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from abc import ABC
-import sys, random
+import sys
 import socket
 import pickle
 import copy
 from py4j.java_gateway import JavaGateway, GatewayParameters, CallbackServerParameters
-from aalpy.base import Automaton, AutomatonState
 from aalpy.SULs import MdpSUL
 from aalpy.utils import load_automaton_from_file
 from StrategyBridge import StrategyBridge
@@ -20,8 +19,8 @@ class MyModel(ABC):
 		mdp = load_automaton_from_file(f'/Users/bo40/workspace/python/AALpy/DotModels/MDPs/{example}.dot', automaton_type='mdp')
 		self.sul = MdpSUL(mdp)
 		# == デバッグ用 ==
-		self.prism_model_path = f'/Users/bo40/workspace/python/mc_exp.prism'
-		self.prism_adv_path = f'/Users/bo40/workspace/python/adv.tra'
+		self.prism_model_path = '/Users/bo40/workspace/python/mc_exp.prism'
+		self.prism_adv_path = '/Users/bo40/workspace/python/adv.tra'
 		# ====
 		self.strategy_bridge = StrategyBridge(self.prism_adv_path, self.prism_model_path)
 		self.number_of_steps = 0
@@ -71,7 +70,7 @@ class MyModel(ABC):
 		return self.number_of_steps
 
 	def eval(self, observation):
-		if self.current_output == None:
+		if self.current_output is None:
 			return 0
 		else:
 			# MDPの出力は次のような文字列 'agree__six__c1_tails__c2_tails'
