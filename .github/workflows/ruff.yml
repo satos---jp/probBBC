@@ -5,4 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # run ruff format
+      - uses: chartboost/ruff-action@v1
+        with:
+          args: 'format --check'
+      # run ruff check
       - uses: chartboost/ruff-action@v1
