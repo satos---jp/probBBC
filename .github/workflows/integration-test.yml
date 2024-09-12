@@ -19,7 +19,7 @@ jobs:
       # Building spot takes time, so we cache it.
       - name: Cache Spot
         id: cache-spot
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-spot
         with:
