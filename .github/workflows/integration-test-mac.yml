@@ -1,13 +1,16 @@
-name: Integration test
+name: Integration test on macos
 on: [push, pull_request]
 env:
   SPOT-VERSION: 2.11.5
 jobs:
-  test-on-ubuntu:
+  test-on-macos:
     runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: check is Python3 Installed
+        run: python3 --version
       
       - name: Download Prism
         run: |
