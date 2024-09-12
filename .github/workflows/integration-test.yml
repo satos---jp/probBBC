@@ -16,10 +16,12 @@ jobs:
           cd prism-4.8.1-linux64-x86
           ./install.sh
           pwd
-          ls ./prism-4.8.1-linux64-x86/bin/prism
-          cat ./prism-4.8.1-linux64-x86/bin/prism | head
+          ls ./bin/prism
+          cat ./bin/prism | head
+          cd ..
           which prism
-          ./prism-4.8.1-linux64-x86/bin/prism
+          cd prism-4.8.1-linux64-x86
+          ./bin/prism
 
       # Building spot takes time, so we cache it.
       - name: Cache Spot
