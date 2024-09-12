@@ -16,15 +16,15 @@ jobs:
         env:
           cache-name: cache-spot
         with:
-          path: spot-${{SPOT-VERSION}}
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ SPOT-VERSION }}
+          path: spot-${{ env.SPOT-VERSION }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ env.SPOT-VERSION }}
       - if: ${{ steps.cache-spot.outputs.cache-hit != 'true' }}
         name: Build Spot
         run: |
           ## Download the source code of spot
-          wget http://www.lrde.epita.fr/dload/spot/spot-${{ SPOT-VERSION }}.tar.gz
-          tar xvf spot-${{ SPOT-VERSION }}.tar.gz
-          cd spot-${{ SPOT-VERSION }}
+          wget http://www.lrde.epita.fr/dload/spot/spot-${{ env.SPOT-VERSION }}.tar.gz
+          tar xvf spot-${{ env.SPOT-VERSION }}.tar.gz
+          cd spot-${{ env.SPOT-VERSION }}
           # Specify appropriate CPU/OS for your environment
           ./configure --prefix "$OLDPWD/.venv/" --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu
           # Build Spot
@@ -34,7 +34,7 @@ jobs:
         run: python3 -m venv .venv
       - name: Install spot
         run: |
-          cd spot-${{ SPOT-VERSION }}
+          cd spot-${{ env.SPOT-VERSION }}
           make install
       - name: Install AALpy
         run: |
