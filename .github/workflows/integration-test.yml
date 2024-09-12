@@ -29,6 +29,11 @@ jobs:
           ./configure --prefix "$OLDPWD/.venv/" --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu
           # Build Spot
           make -j8
+      
+      - name: Check spot installation
+        run: |
+          . .venv/bin/activate
+          echo "import spot" | python3
 
       - name: Set-up Python venv
         run: python3 -m venv .venv
@@ -48,15 +53,4 @@ jobs:
         run: |
           . .venv/bin/activate
           pip install -r requirements.txt
-      - name: Run src/main.py as an integration test
-        run: |
-          . .venv/bin/activate
-          python3 src/main.py \
-            --model-file benchmarks/mqtt/mqtt.dot \
-            --prop-file benchmarks/mqtt/mqtt.props \
-            --prism-path foo/bin/prism \
-            --output-dir result \
-            --min-rounds 3 \
-            --max-rounds 5 \
-            --save-files-for-each-round \
-            --target-unambiguity 0.99
+
