@@ -15,6 +15,8 @@ jobs:
           tar xfz prism-4.8.1-linux64-x86.tar.gz
           pwd
           ls ./prism-4.8.1-linux64-x86/bin/prism
+          cat ./prism-4.8.1-linux64-x86/bin/prism | head
+          ./prism-4.8.1-linux64-x86/bin/prism
 
       # Building spot takes time, so we cache it.
       - name: Cache Spot
