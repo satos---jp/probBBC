@@ -1,0 +1,20 @@
+name: Integration test
+on: [push, pull_request]
+jobs:
+  test-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set-up Python venv
+        run: python3 -m venv .venv && . .venv/bin/activate
+      - name: Run test
+        run: python3 src/main.py \
+                --model-file benchmarks/mqtt/mqtt.dot \
+                --prop-file benchmarks/mqtt/mqtt.props \
+                --prism-path foo/bin/prism \
+                --output-dir result \
+                --min-rounds 3 \
+                --max-rounds 5 \
+                --save-files-for-each-round \
+                --target-unambiguity 0.99
