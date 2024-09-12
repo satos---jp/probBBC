@@ -47,7 +47,7 @@ jobs:
           cd AALpy
           patch -p1 < ../aalpy.patch
           python3 -m pip install pydot
-          sudo python3 setup.py install
+          python3 setup.py install
       - name: Check AALpy installation
         run: |
           . .venv/bin/activate
