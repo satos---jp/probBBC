@@ -29,18 +29,17 @@ jobs:
           ./configure --prefix "$OLDPWD/.venv/" --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu
           # Build Spot
           make -j8
+
       - name: Set-up Python venv
         run: python3 -m venv .venv
       - name: Install spot
         run: |
           cd spot-${{ env.SPOT-VERSION }}
           make install
-
       - name: Check spot installation
         run: |
           . .venv/bin/activate
-          echo "import spot" | python3
-
+          python3 -c "import spot"
       - name: Install AALpy
         run: |
           git clone https://github.com/DES-Lab/AALpy -b v.1.4.1 --depth 1
@@ -49,6 +48,10 @@ jobs:
           patch -p1 < ../aalpy.patch
           python3 -m pip install pydot
           sudo python3 setup.py install
+      - name: Check AALpy installation
+        run: |
+          . .venv/bin/activate
+          python3 -c "import aalpy"
       - name: Install other packages
         run: |
           . .venv/bin/activate
