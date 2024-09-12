@@ -69,7 +69,7 @@ jobs:
           python3 src/main.py \
             --model-file benchmarks/mqtt/mqtt.dot \
             --prop-file benchmarks/mqtt/mqtt.props \
-            --prism-path prism-4.8.1-linux64-x86/bin/prism \
+            --prism-path ./prism-4.8.1-linux64-x86/bin/prism \
             --output-dir result \
             --min-rounds 3 \
             --max-rounds 5 \
