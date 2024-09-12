@@ -4,7 +4,7 @@ env:
   SPOT-VERSION: 2.11.5
 jobs:
   test-on-ubuntu:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
           tar xvf spot-${{ env.SPOT-VERSION }}.tar.gz
           cd spot-${{ env.SPOT-VERSION }}
           # Specify appropriate CPU/OS for your environment
-          ./configure --prefix "$OLDPWD/.venv/" --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu
+          ./configure --prefix "$OLDPWD/.venv/"
           # Build Spot
           make -j8
 
