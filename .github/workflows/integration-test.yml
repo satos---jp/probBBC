@@ -15,13 +15,6 @@ jobs:
           tar xfz prism-4.8.1-linux64-x86.tar.gz
           cd prism-4.8.1-linux64-x86
           ./install.sh
-          pwd
-          ls ./bin/prism
-          cat ./bin/prism | head
-          cd ..
-          which prism
-          cd prism-4.8.1-linux64-x86
-          ./bin/prism
 
       # Building spot takes time, so we cache it.
       - name: Cache Spot
