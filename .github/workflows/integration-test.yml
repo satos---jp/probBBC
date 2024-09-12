@@ -13,7 +13,8 @@ jobs:
         run: |
           wget http://www.prismmodelchecker.org/dl/prism-4.8.1-linux64-x86.tar.gz
           tar xfz prism-4.8.1-linux64-x86.tar.gz
-          ls -R
+          pwd
+          ls ./prism-4.8.1-linux64-x86/bin/prism
 
       # Building spot takes time, so we cache it.
       - name: Cache Spot
