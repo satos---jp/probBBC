@@ -83,8 +83,8 @@ jobs:
             --prop-file benchmarks/mqtt/mqtt.props \
             --prism-path "$(pwd)/prism-${{ env.PRISM-VERSION }}/bin/prism" \
             --output-dir result \
-            --min-rounds 3 \
-            --max-rounds 5 \
+            --min-rounds 10 \
+            --max-rounds 15 \
             --save-files-for-each-round \
             --target-unambiguity 0.99
 
