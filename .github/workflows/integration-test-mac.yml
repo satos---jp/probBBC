@@ -14,6 +14,11 @@ jobs:
 
       - name: Set-up Python venv
         run: python3 -m venv .venv
+      
+      - name: Search Python
+        run: |
+          . .venv/bin/activate
+          sudo find / -iname "Python.h"
 
       # Building spot takes time, so we cache it.
       - name: Cache Spot
