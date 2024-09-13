@@ -40,7 +40,7 @@ jobs:
           # Set path to Python.h
           if [[ -z $C_INCLUDE_PATH ]]; then
             # XXX: the version should be obtained from the command result
-            C_INCLUDE_PATH="/Library/Frameworks/Python.framework/Versions/3.12/include/python3.12/"
+            C_INCLUDE_PATH="/Library/Frameworks/Python.framework/Versions/3.12/include/python3.12"
           fi
           echo "PATH: $C_INCLUDE_PATH"
           # Specify appropriate CPU/OS for your environment
