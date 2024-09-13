@@ -18,7 +18,7 @@ jobs:
       - name: Search Python
         run: |
           . .venv/bin/activate
-          sudo find / -iname "Python.h"
+          echo "Current C path: $C_INCLUDE_PATH"
 
       # Building spot takes time, so we cache it.
       - name: Cache Spot
