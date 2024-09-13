@@ -54,6 +54,7 @@ class StatisticalModelChecker:
         self.exec_count_violation = 0
 
     def run(self):
+        self.log.info(f"Start running sut")
         for k in range(0, self.num_exec):
             self.reset_sut()
             for i in range(0, self.max_exec_len):
@@ -85,7 +86,7 @@ class StatisticalModelChecker:
                 if row_to_close or consistency_violation:
                     return -1
 
-            if (k + 1) % 1000 == 0:
+            if k == 1 or (k + 1) % 1000 == 0:
                 self.log.info(f"SUT executed {k} times")
 
         return None
