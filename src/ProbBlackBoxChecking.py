@@ -275,7 +275,7 @@ class ProbBBReachOracle(RandomWalkEqOracle):
     def find_cex(self, hypothesis):
         self.rounds += 1
 
-        logging.debug("Called find_cex of ProbBBReachOracle")
+        logging.info("Called find_cex of ProbBBReachOracle")
 
         if isinstance(hypothesis, StochasticMealyMachine):
             mdp = smm_to_mdp_conversion(hypothesis)
@@ -378,7 +378,7 @@ class ProbBBReachOracle(RandomWalkEqOracle):
             f"SMC executed SUL {smc.number_of_steps} steps ({smc.exec_count_satisfication + smc.exec_count_violation} queries)"
         )
         if not self.only_classical_equivalence_testing:
-            logging.info(f"CEX from SMC: {cex}")
+            logging.info(f"CEX from SMC:< {cex} >")
 
             if cex != -1 and cex is not None:
                 # 具体的な反例が得られればそれを返す
