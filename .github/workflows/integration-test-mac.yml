@@ -57,8 +57,7 @@ jobs:
           cd AALpy
           patch -p1 < ../aalpy.patch
           python3 -m pip install pydot
-          python3 --version
-          python3 -c "import setuptools"
+          python3 -m pip install setuptools
           python3 setup.py install
       - name: Check AALpy installation
         run: |
