@@ -11,13 +11,9 @@ jobs:
       
       - name: check is Python3 Installed
         run: python3 --version
-      
-      - name: Download Prism
-        run: |
-          wget http://www.prismmodelchecker.org/dl/prism-4.8.1-linux64-x86.tar.gz
-          tar xfz prism-4.8.1-linux64-x86.tar.gz
-          cd prism-4.8.1-linux64-x86
-          ./install.sh
+
+      - name: Set-up Python venv
+        run: python3 -m venv .venv
 
       # Building spot takes time, so we cache it.
       - name: Cache Spot
@@ -31,6 +27,7 @@ jobs:
       - if: ${{ steps.cache-spot.outputs.cache-hit != 'true' }}
         name: Build Spot
         run: |
+          . .venv/bin/activate
           ## Download the source code of spot
           wget http://www.lrde.epita.fr/dload/spot/spot-${{ env.SPOT-VERSION }}.tar.gz
           tar xvf spot-${{ env.SPOT-VERSION }}.tar.gz
@@ -39,9 +36,14 @@ jobs:
           ./configure --prefix "$OLDPWD/.venv/"
           # Build Spot
           make -j8
+      
+      - name: Download Prism
+        run: |
+          wget http://www.prismmodelchecker.org/dl/prism-4.8.1-linux64-x86.tar.gz
+          tar xfz prism-4.8.1-linux64-x86.tar.gz
+          cd prism-4.8.1-linux64-x86
+          ./install.sh
 
-      - name: Set-up Python venv
-        run: python3 -m venv .venv
       - name: Install spot
         run: |
           cd spot-${{ env.SPOT-VERSION }}
