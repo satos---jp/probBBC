@@ -14,10 +14,18 @@ jobs:
 
       - name: check is Python3 Installed
         run: python3 --version
+      
+      - name: Get Python path according to ./configure
+        run: python3 -c "import sys; from distutils import sysconfig; sys.stdout.write(sysconfig.get_python_inc())"
 
       - name: Set-up Python venv
         run: python3 -m venv .venv
-      
+  
+      - name: Get Python path according to ./configure with venv
+        run: |
+          . .venv/bin/activate
+          python3 -c "import sys; from distutils import sysconfig; sys.stdout.write(sysconfig.get_python_inc())"
+
       - name: Search Python
         run: |
           . .venv/bin/activate
