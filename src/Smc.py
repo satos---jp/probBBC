@@ -61,6 +61,7 @@ class StatisticalModelChecker:
                 ret = self.one_step()
                 # Hypothesisで遷移できないような入出力列が見つかれば、SMCを終了
                 if not ret and self.returnCEX:
+                    self.log.info(f"SUT return self.exec_trace")
                     return self.exec_trace
                 (monitor_ret, satisfied) = self.step_monitor(self.current_output_aps)
                 if not monitor_ret:
@@ -89,6 +90,7 @@ class StatisticalModelChecker:
             if k == 1 or True or (k + 1) % 1000 == 0:
                 self.log.info(f"SUT executed {k} times")
 
+        self.log.info(f"SUT return None")
         return None
 
     def hypothesis_testing(self, mean, alternative):
