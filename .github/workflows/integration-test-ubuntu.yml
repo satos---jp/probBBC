@@ -1,15 +1,15 @@
-name: Integration test on macos
+name: Integration test on ubuntu
 on: [push, pull_request]
 env:
   SPOT-VERSION: 2.12
-  PRISM-VERSION: 4.8.1-mac64-arm
+  PRISM-VERSION: 4.8.1-linux64-x86
 jobs:
-  test-on-macos:
-    runs-on: macos-latest
+  test-on-ubuntu:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: check Python3 version
         run: python3 --version
 
@@ -37,7 +37,7 @@ jobs:
           tar xvf spot-${{ env.SPOT-VERSION }}.tar.gz
           cd spot-${{ env.SPOT-VERSION }}
           # Specify appropriate CPU/OS for your environment
-          ./configure --prefix "$OLDPWD/.venv/"
+          ./configure --prefix "$OLDPWD/.venv/" --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu
           # Build Spot
           make -j8
 
@@ -58,7 +58,6 @@ jobs:
           cd AALpy
           patch -p1 < ../aalpy.patch
           python3 -m pip install pydot
-          python3 -m pip install setuptools
           python3 setup.py install
       - name: Check AALpy installation
         run: |
