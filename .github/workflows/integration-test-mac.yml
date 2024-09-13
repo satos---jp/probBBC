@@ -66,8 +66,10 @@ jobs:
       - name: Install other packages
         run: |
           . .venv/bin/activate
-          pip install -r requirements.txt
-      
+          # pip install -r requirements.txt
+          python3 -m pip install numpy pyparsing scipy ruff
+          python3 -m pip list
+
       - name: Download Prism
         run: |
           wget https://www.prismmodelchecker.org/dl/prism-4.8.1-mac64-arm.tar.gz
