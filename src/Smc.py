@@ -151,8 +151,11 @@ class StatisticalModelChecker:
         edges = self.spec_monitor_out[self.monitor_current_state]
         accept = False
         satisfied_ret = False
+        self.log.info("start step_monitor loop")
         for e in edges:
+            self.log.info("before call guardCheck loop")
             (next_state, satisfied) = self.guardCheck(output_aps, e)
+            self.log.info("after call guardCheck loop")
             if not next_state:
                 continue
             else:
@@ -160,6 +163,8 @@ class StatisticalModelChecker:
                 self.monitor_current_state = next_state
                 satisfied_ret = satisfied
                 break
+        
+        self.log.info("end step_monitor loop")
         return (accept, satisfied_ret)
 
     # 出力outputと、モニターのedgeを受け取り、edgeの条件をoutputが満たしているか判定する
