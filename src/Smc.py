@@ -27,6 +27,14 @@ class StatisticalModelChecker:
         returnCEX=False,
     ):
         self.log = logging.getLogger("StatisticalModelChecker")
+        import sys
+        self.log.addHandler(logging.StreamHandler())
+        logf = self.log.info
+        def flogf(s):
+            logf(s)
+            self.log.handlers[0].flush()
+        self.log.info = flogf
+
         self.sut = mdp_sut
         self.strategy_bridge = strategy_bridge
         self.sut_value = sut_value
