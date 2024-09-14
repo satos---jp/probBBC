@@ -41,7 +41,7 @@ class StatisticalModelChecker:
         self.observation_table: SamplingBasedObservationTable = observation_table
         with open(spec_path) as f:
             spec = f.readline()
-        self.spec_monitor = spot.translate(spec, "monitor", "det")
+        self.spec_monitor : spot.translate.resultnyaosu = spot.translate(spec, "monitor", "det")
         self.bdict = self.spec_monitor.get_dict()
         self.spec_monitor_out = []
         for s in range(0, self.spec_monitor.num_states()):
@@ -159,6 +159,12 @@ class StatisticalModelChecker:
         edges = self.spec_monitor_out[self.monitor_current_state]
         accept = False
         satisfied_ret = False
+
+        self.log.info("start enumerate edge for debug")
+        for e in edges:
+            pass
+        self.log.info("end enumerate edge for debug")
+
         self.log.info("start step_monitor loop")
         for e in edges:
             self.log.info("before call guardCheck loop")
