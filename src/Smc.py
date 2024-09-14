@@ -165,11 +165,14 @@ class StatisticalModelChecker:
             (next_state, satisfied) = self.guardCheck(output_aps, e)
             self.log.info("after call guardCheck loop")
             if not next_state:
+                self.log.info("before continue")
                 continue
             else:
+                self.log.info("before assign and break")
                 accept = True
                 self.monitor_current_state = next_state
                 satisfied_ret = satisfied
+                self.log.info("before break edge loop")
                 break
         
         self.log.info("end step_monitor loop")
