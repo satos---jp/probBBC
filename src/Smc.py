@@ -56,9 +56,14 @@ class StatisticalModelChecker:
     def run(self):
         self.log.info(f"Start running sut")
         for k in range(0, self.num_exec):
+            def l(s):
+                if k < 20:
+                    self.log.info("@log: " + s)
             self.reset_sut()
+            l("reset")
             for i in range(0, self.max_exec_len):
                 ret = self.one_step()
+                l(f"onestep: {i}")
                 # Hypothesisで遷移できないような入出力列が見つかれば、SMCを終了
                 if not ret and self.returnCEX:
                     self.log.info(f"SUT return self.exec_trace")
@@ -69,10 +74,13 @@ class StatisticalModelChecker:
                     break
                 if satisfied and not self.returnCEX:
                     break
+            l("before post")
             self.post_sut()
+            l("after post")
             if monitor_ret:
                 self.exec_count_satisfication += 1
                 self.satisfied_exec_sample.append(self.exec_trace)
+            l("before append")
             self.exec_sample.append(self.exec_trace)
 
             if (k + 1) % 500 == 0 and self.observation_table:
@@ -87,7 +95,8 @@ class StatisticalModelChecker:
                 if row_to_close or consistency_violation:
                     return -1
 
-            if k == 1 or True or (k + 1) % 1000 == 0:
+            if (k + 1) % 1000 == 0:
+                l(f"SUT executed {k} times")
                 self.log.info(f"SUT executed {k} times")
 
         self.log.info(f"SUT return None")
