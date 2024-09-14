@@ -161,7 +161,9 @@ class StatisticalModelChecker:
         satisfied_ret = False
 
         self.log.info("start enumerate edge for debug")
-        for e in edges:
+        es = list(edges)
+        self.log.info("list generated")
+        for e in es:
             pass
         self.log.info("end enumerate edge for debug")
 
