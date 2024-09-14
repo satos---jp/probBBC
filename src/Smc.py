@@ -62,13 +62,15 @@ class StatisticalModelChecker:
             self.reset_sut()
             l("reset")
             for i in range(0, self.max_exec_len):
+                l(f"onestep start: {i}")
                 ret = self.one_step()
-                l(f"onestep: {i}")
+                l(f"onestep finished: {i}")
                 # Hypothesisで遷移できないような入出力列が見つかれば、SMCを終了
                 if not ret and self.returnCEX:
                     self.log.info(f"SUT return self.exec_trace")
                     return self.exec_trace
                 (monitor_ret, satisfied) = self.step_monitor(self.current_output_aps)
+                l(f"monitor finished: {i}")
                 if not monitor_ret:
                     self.exec_count_violation += 1
                     break
