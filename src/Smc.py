@@ -166,6 +166,7 @@ class StatisticalModelChecker:
     # 返り値はペアで、一つ目は条件を満たしていてedgeで遷移できるならば遷移先の状態を返し、遷移できないならばNoneを返す
     # 二つ目はセルフループしか存在しない状態に到達したか否か（以降は条件が常に成立するか否か）
     def guardCheck(self, output_aps: List[str], edge):
+        self.log.info("start guardCheck")
         cond = edge.cond
         # label = spot.bdd_format_formula(self.bdict, cond)
         # # print(f'output: {output}')
@@ -173,7 +174,9 @@ class StatisticalModelChecker:
         neg_cond = buddy.bdd_not(cond)
         if buddy.bdd_satcount(neg_cond) == 0 and edge.src == edge.dst:
             # 条件が常に成立
+            self.log.info("fast return guardCheck")
             return (edge.dst, True)
+        self.log.info("rest guardCheck")
         aps_bdd = buddy.bdd_support(cond)
         aps = spot.bdd_format_formula(self.bdict, aps_bdd).split(" & ")
         for ap in aps:
@@ -186,6 +189,7 @@ class StatisticalModelChecker:
         # restricted_label = spot.bdd_format_formula(self.bdict, cond)
         # print(f'cond  : {restricted_label}')
         ret = buddy.bdd_satcount(cond)
+        self.log.info("return guardCheck")
         if ret > 0:
             return (edge.dst, False)
         else:

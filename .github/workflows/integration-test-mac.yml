@@ -59,7 +59,11 @@ jobs:
           patch -p1 < ../aalpy.patch
           python3 -m pip install pydot
           python3 -m pip install setuptools
+          echo "before instll aalpy"
+          python3 -m pip list
           python3 setup.py install
+          echo "after install aalpy"
+          python3 -m pip list
       - name: Check AALpy installation
         run: |
           . .venv/bin/activate
